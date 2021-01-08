@@ -42,7 +42,30 @@ a, a:visited{
 
 
 .footer{
-    background-color: blue;
+    background-color: darkred;
     text-align: center;
     color: white;
+}
+
+#menu{
+    color: black;
+    text-align:center;
+    font-size: 18;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+a{
+    color:black;
+    font-weight:500;
+}
+
+a:hover{
+    text-decoration: underline;
+    color:darkred;
+    font-weight: bold;
+}
+
+#servisi{
+    text-align: center;
 }
