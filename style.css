@@ -1,0 +1,48 @@
+#header_photo{
+    width: 150px;
+    height: 150px;
+}
+
+.reklama{
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    padding-top: 22px;
+    padding-bottom: 10px;
+}
+
+#login{
+    color: white;
+    padding-top: 38px;
+}
+
+#login1{
+    color: black;
+    margin-bottom: 0;
+}
+
+/*.col-sm-12{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.levo{
+    background-color: black;
+    height:400px;
+    color: white;
+}
+
+a, a:visited{
+    color: white;
+}*/
+
+.header{
+    background-color: darkred;
+}
+
+
+.footer{
+    background-color: blue;
+    text-align: center;
+    color: white;
+}
