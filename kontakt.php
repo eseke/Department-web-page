@@ -1,7 +1,7 @@
 <head>
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Početna</title>
+    <title>Kontakt</title>
 </head>
 
 <body>
@@ -12,6 +12,11 @@
     include('header.php');
     include('login.php');
     include('menu.html');
+    echo "dr Nenad Korolija<br/>";
+    echo "kabinet: Paviljon, 26<br/>";
+    echo "tel: +381 11 3218389<br/>";
+    echo "e-mail: nenadko@etf.rs";
+
     include('footer.html');
     ?>
     </div>

@@ -8,6 +8,7 @@ if(!mysqli_num_rows($result))
 $row = mysqli_fetch_assoc($result);
 if(!$row['status'])
     header("Location: zaposleni");
+echo "<title>".$row['name']." ".$row['surname']."</title>";
 echo "Ime: ".$row['name']."<br/>";
 echo "Prezime: ".$row['surname']."<br/>";
 echo "Email: ".$row['email']."<br/>";

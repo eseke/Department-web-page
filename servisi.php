@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <title>Servisi</title>
 </head>
 
 <body>

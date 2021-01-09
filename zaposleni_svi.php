@@ -1,4 +1,5 @@
 <?php
+    echo "<title>Zaposleni</title>";
     include('db_conn.php');
     $result = mysqli_query($conn,'SELECT DISTINCT `korisnik`.`status`,`predmet`.`aktivan`,`korisnik`.`name`,`korisnik`.`surname`,`zaposleni`.`email`,`predmet`.`naziv`,`predmet`.`sifra_predmeta`'.
     ',`zaposleni`.`zvanje`,`zaposleni`.`id` FROM `zaposleni`,`drzi_predmet`,`predmet`,`korisnik` WHERE `zaposleni`.`email`=`drzi_predmet`.`id_nastavnika` and '.

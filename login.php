@@ -14,6 +14,11 @@
                 $_SESSION['role'] = 'Administrator';
             elseif($row['type']=="s")
                 $_SESSION['role'] = 'Student';
+            else{
+                $result = mysqli_query($conn, "select `zaposleni`.`zvanje` from zaposleni where email='".$_POST['username']."'");
+                $row = mysqli_fetch_assoc($result);
+                $_SESSION['role'] = $row['zvanje'];
+            }
         }
         else{
             $_SESSION['login_mess'] = "Nisu dobri podaci";
