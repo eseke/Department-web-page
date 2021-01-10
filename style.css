@@ -55,6 +55,12 @@ a, a:visited{
     padding-right: 0;
 }
 
+#ipsum{
+    padding-left: 0;
+    padding-right: 0;
+    text-align: justify;
+}
+
 a{
     color:black;
     font-weight:500;
@@ -68,4 +74,14 @@ a:hover{
 
 #servisi{
     text-align: center;
+}
+
+.splide{
+    margin:auto;
+    width: 50%;
+
+}
+
+.splide__slide img {
+	width : 100%;
 }
