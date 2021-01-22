@@ -14,9 +14,23 @@
     include('menu.html');
 
     include('db_conn.php');
+	$hash = [];
+	if(isset($_SESSION['role']) && $_SESSION['role']=='Student master studija'){
+		echo "<h4>Moji predmeti</h4>";
+		$result = mysqli_query($conn, "select * from prati_predmet,predmet where prati_predmet.id_student ='".$_SESSION['email']."' and prati_predmet.sifra_predmet=predmet.sifra_predmeta");
+	if(mysqli_num_rows($result)){
+		while($row = mysqli_fetch_assoc($result)){
+			$hash[$row['sifra_predmeta']] = true;
+			echo " &nbsp &nbsp<a href='predmet?sifra=".$row['sifra_predmeta']."'>".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']."</a><br/>";
+		}
+	}
+	else
+		echo "Niste odabrali ni jedan predmet!!<br/>";
+    echo "<h4>Ostali predmeti</h4>";
+	}
+
     $result = mysqli_query($conn,'SELECT * FROM `nastavni_plan`,`predmet` WHERE `nastavni_plan`.`sifra_predmeta`=`predmet`.`sifra_predmeta` order by `nastavni_plan`.`semestar` asc');
     if(mysqli_num_rows($result)){
-        $hash = [];
         $godina = 0;
         $semestar = 0;
         while($row = mysqli_fetch_assoc($result)){
