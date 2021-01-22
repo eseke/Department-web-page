@@ -12,11 +12,14 @@
     include('header.php');
     include('login.php');
     include('menu.html');
-    echo "dr Nenad Korolija<br/>";
-    echo "kabinet: Paviljon, 26<br/>";
-    echo "tel: +381 11 3218389<br/>";
-    echo "e-mail: nenadko@etf.rs";
-
+?>
+<div id='kontakt'>
+    dr Nenad Korolija<br/>
+    kabinet: Paviljon, 26<br/>
+    tel: +381 11 3218389<br/>
+    e-mail: <a href='mailto:nenadko@etf.rs'id='kontakt1'>nenadko@etf.rs</a>
+</div>
+<?php
     include('footer.html');
     ?>
     </div>

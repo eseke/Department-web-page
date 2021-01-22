@@ -3,8 +3,8 @@
                 <img src='https://www.etf.bg.ac.rs/assets/logo-sr-449e87364798e04e5b9e49e085f8ca26f431ecf6bf7aa458926b23fa1836b640.png' id='header_photo'>
             </div>
             <div class='col-sm-7 reklama'>
-                Univerzitet u Beogradu <br/>
-                Elektrotehnicki fakultet <br/>
+                <a href='http://bg.ac.rs' target="_blank" rel="noopener noreferrer" id='link'>Univerzitet u Beogradu</a> <br/>
+                <a href='http://etf.bg.ac.rs' target="_blank" rel="noopener noreferrer" id='link'>Elektrotehnicki fakultet</a> <br/>
                 Katedra za računarsku tahniku i informatiku
             </div>
             <div class='col-sm-3' id='login'>
