@@ -1,3 +1,4 @@
 *.txt
 .vscode/
 bootstrap.min.css
+*.pdf

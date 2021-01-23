@@ -51,7 +51,10 @@
                 }
             
                 $hash[$row['sifra_predmeta']] = true;
-                echo " &nbsp &nbsp".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']." ".$row['semestar']."<br/>";
+                if(isset($_SESSION['role']) && $_SESSION['role']=='Student master studija')
+                    echo " &nbsp &nbsp<a href='predmet?sifra=".$row['sifra_predmeta']."'>".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']."</a><br/>";
+                else
+                    echo " &nbsp &nbsp".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']." ".$row['semestar']."<br/>";
             }
         }
     }
