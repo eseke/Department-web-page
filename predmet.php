@@ -1,6 +1,6 @@
 <head>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
     <title>Kontakt</title>
 </head>
 
@@ -8,7 +8,7 @@
     <div class='container'>
 <?php
     session_start();
-    include('db_conn.php');
+    include('include/db_conn.php');
     if(isset($_SESSION['email']) && isset($_GET['sifra']) && isset($_POST['Zelim'])){
         mysqli_query($conn,"insert into prati_predmet (id_student, sifra_predmet) values ('".$_SESSION['email']."','".$_GET['sifra']."')");
         header('Location:#');
@@ -19,9 +19,9 @@
         $result = mysqli_query($conn,"select predmet.naziv from prati_predmet,predmet where prati_predmet.id_student='".$_SESSION['email']."' and prati_predmet.sifra_predmet='".$_GET['sifra']."' and prati_predmet.sifra_predmet=predmet.sifra_predmeta");
         header('Content-type: text/html; charset=utf-8');
         if(!mysqli_num_rows($result)){
-            include('header.php');
-            include('login.php');
-            include('menu.html');
+            include('include/header.php');
+            include('include/login.php');
+            include('include/menu.html');
             echo "Da li želite da se prijavite na predmet ".$_GET['sifra'];
             ?>
                 <form method='post' action="/predmet?sifra=<?php echo $_GET['sifra']?>">
@@ -30,22 +30,22 @@
             <?php
         }
         else{
-            include('header_pred.php');
-            include('login.php');
-            include('menu_pred.php');
+            include('predmeti/header_pred.php');
+            include('include/login.php');
+            include('predmeti/menu_pred.php');
             if(isset($_GET['str']) && $_GET['str']=="info")
-                include("info.php");
+                include("predmeti/info.php");
             else if(isset($_GET['str'])&& ($_GET['str']=="predavanja" || $_GET['str']=="vezbe" || $_GET['str']=="rokovi"))
-                include("ispis_fajlova.php");
+                include("predmeti/ispis_fajlova.php");
             else if(isset($_GET['str']))
                 header("Location: ?sifra=".$_GET['sifra']);
             else
-                include('obavestenja_pred.php');
+                include('predmeti/obavestenja_pred.php');
 
             
         }
-        include('footer.html');
-        include('db_disconn.php');
+        include('include/footer.html');
+        include('include/db_disconn.php');
     }
     ?>
     </div>

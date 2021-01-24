@@ -1,6 +1,6 @@
 <?php
 
-include('db_conn.php');
+include('./include/db_conn.php');
 
 $result = mysqli_query($conn,'SELECT * from `zaposleni`,`korisnik` where `zaposleni`.`email`=`korisnik`.`email` and `zaposleni`.`id`='.$_GET['id']);
 if(!mysqli_num_rows($result))
@@ -17,6 +17,6 @@ echo "Kabinet: ".$row['broj kabineta']."<br/>";
 echo "Biografija: ".$row['biografija']."<br/>";
 echo "<img width='150px' src=".$row["profilna slika"]." >";
 
-include('db_disconn.php');
+include('./include/db_disconn.php');
 
 ?>

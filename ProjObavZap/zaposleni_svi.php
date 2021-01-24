@@ -1,6 +1,6 @@
 <?php
     echo "<title>Zaposleni</title>";
-    include('db_conn.php');
+    include('./include/db_conn.php');
     $result = mysqli_query($conn,'SELECT DISTINCT `korisnik`.`status`,`predmet`.`aktivan`,`korisnik`.`name`,`korisnik`.`surname`,`zaposleni`.`email`,`predmet`.`naziv`,'.
     '`predmet`.`sifra_predmeta`,`zaposleni`.`zvanje`,`zaposleni`.`id` FROM `zaposleni`,`drzi_predmet`,`predmet`,`korisnik`,grupa WHERE `zaposleni`.`email`=`drzi_predmet`.`id_nastavnika`'.
     ' and drzi_predmet.id_grupe=grupa.id and grupa.sifra_predmeta=predmet.sifra_predmeta and `zaposleni`.`email`=`korisnik`.`email` order by `zaposleni`.`email` asc');
@@ -29,5 +29,5 @@
             };
         }
     }
-    include('db_disconn.php');
+    include('./include/db_disconn.php');
     ?>

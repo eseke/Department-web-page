@@ -13,9 +13,9 @@
                     if(isset($_SESSION['name'])){
                         echo $_SESSION['name']." ".$_SESSION['surname']."<br/>";
                         echo $_SESSION['role'];
-                        include('logout.html');
+                        include('./include/logout.html');
                     }else{
-                        include('login.html');
+                        include('./include/login.html');
                     }
                     if(isset($_SESSION['login_mess']))
                     {

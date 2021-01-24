@@ -1,6 +1,6 @@
 <head>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
 	<title>Master</title>
 </head>
 
@@ -9,11 +9,11 @@
 <?php
     session_start();
     header('Content-type: text/html; charset=utf-8');
-    include('header.php');
-    include('login.php');
-    include('menu.html');
+    include('include/header.php');
+    include('include/login.php');
+    include('include/menu.html');
 
-    include('db_conn.php');
+    include('include/db_conn.php');
 	$hash = [];
 	if(isset($_SESSION['role']) && $_SESSION['role']=='Student master studija'){
 		echo "<h4>Moji predmeti</h4>";
@@ -58,8 +58,8 @@
             }
         }
     }
-    include('db_disconn.php');
-    include('footer.html');
+    include('include/db_disconn.php');
+    include('include/footer.html');
     ?>
     </div>
 </doby>

@@ -1,6 +1,6 @@
 <head>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
@@ -8,16 +8,16 @@
 <?php
     session_start();
     header('Content-type: text/html; charset=utf-8');
-    include('header.php');
-    include('login.php');
-    include('menu.html');
+    include('include/header.php');
+    include('include/login.php');
+    include('include/menu.html');
 
     if(isset($_GET['id'])){
-       include('zaposleni_jedan.php');
+       include('ProjObavZap/zaposleni_jedan.php');
     }else
-        include('zaposleni_svi.php');
+        include('ProjObavZap/zaposleni_svi.php');
 
-    include('footer.html');
+    include('include/footer.html');
 ?>
     </div>
 </doby>

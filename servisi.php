@@ -1,6 +1,6 @@
 <head>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
     <title>Servisi</title>
 </head>
 
@@ -9,9 +9,9 @@
 <?php
     session_start();
     header('Content-type: text/html; charset=utf-8');
-    include('header.php');
-    include('login.php');
-    include('menu.html');
+    include('include/header.php');
+    include('include/login.php');
+    include('include/menu.html');
 ?>
 <div id='servisi'>
     <a href='http://www.etf.rs/' target="_blank">Fakultet</a><br/>
@@ -20,7 +20,7 @@
     <a href='http://rti.etf.rs/sale' target="_blank">Paviljoni laboratorija</a><br/>
 </div>
 <?php
-    include('footer.html');
+    include('include/footer.html');
     ?>
     </div>
 </doby>

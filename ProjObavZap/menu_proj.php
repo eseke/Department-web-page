@@ -3,7 +3,7 @@
         <a href = 'projekti'>Svi</a>
         <?php
             
-        include('db_conn.php');
+        include('./include/db_conn.php');
         $result = mysqli_query($conn,'SELECT * from kategorija_projekta');
         while($row = mysqli_fetch_assoc($result)){
             echo "&nbsp;&nbsp;<a href = '?tip=".$row['naziv']."'>".$row['naziv']."</a>";

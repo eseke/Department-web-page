@@ -1,9 +1,9 @@
 <head>
     <title>Početna</title>
 
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"></script>
     <script>
@@ -25,9 +25,9 @@
 <?php
     session_start();
     header('Content-type: text/html; charset=utf-8');
-    include('header.php');
-    include('login.php');
-    include('menu.html');
+    include('include/header.php');
+    include('include/login.php');
+    include('include/menu.html');
     ?>
     <div class='row' >
         <div class='col-sm-12' id='ipsum'>
@@ -51,7 +51,7 @@
         </div>
     </div>
     <?php
-    include('footer.html');
+    include('include/footer.html');
     ?>
     </div>
     
