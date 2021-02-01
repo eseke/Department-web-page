@@ -103,3 +103,31 @@ a:hover{
 #davno{
     opacity: 30%;
 }
+
+#nastavnik{
+    color: white;
+    font-weight: initial;
+}
+
+#nastavnik:hover{
+    color: white;
+    text-decoration: none;
+}
+
+#centar{
+    text-align: center;
+}
+
+form{
+    margin-bottom: 0;
+}
+
+textarea{
+    resize: none;
+    width: 100%;
+    height: 80px;
+}
+
+form#predmet{
+    display:inline;
+}

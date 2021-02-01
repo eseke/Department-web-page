@@ -13,7 +13,7 @@ echo "Ime: ".$row['name']."<br/>";
 echo "Prezime: ".$row['surname']."<br/>";
 echo "Email: ".$row['email']."<br/>";
 echo "Zvanje: ".$row['zvanje']."<br/>";
-echo "Kabinet: ".$row['broj kabineta']."<br/>";
+echo "Kabinet: ".$row['broj_kabineta']."<br/>";
 echo "Biografija: ".$row['biografija']."<br/>";
 echo "<img width='150px' src=".$row["profilna slika"]." >";
 

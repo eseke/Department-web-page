@@ -16,6 +16,7 @@
             $_SESSION['name'] = $row['name'];
             $_SESSION['surname'] = $row['surname'];
             $_SESSION['email'] = $row['email'];
+            $_SESSION['type'] = $row['type'];
             if($row['type']=="a")
                 $_SESSION['role'] = 'Administrator';
             elseif($row['type']=="s"){

@@ -39,8 +39,10 @@
                 include("predmeti/ispis_fajlova.php");
             else if(isset($_GET['str']))
                 header("Location: ?sifra=".$_GET['sifra']);
-            else
-                include('predmeti/obavestenja_pred.php');
+            else{
+                include 'predmeti/obavestenja_pred.php';
+                ispis_obav($_GET['sifra'],false);
+            }
 
             
         }
