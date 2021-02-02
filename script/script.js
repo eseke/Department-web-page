@@ -87,3 +87,25 @@ function dodajFajlove(){
 		posaljiFajlove();
 	return false;
 }
+
+
+function dodaj_obav(){
+	document.getElementById('obavestenja').innerHTML='';
+	var da= true;
+	if(document.getElementById('kat').value==''){
+		da = false;
+		document.getElementById('obavestenja').innerHTML += "Niste izabrali kategoriju obaveštenja!<br/>";
+	}
+	if(document.getElementById('naslov').value==''){
+		da = false;
+		document.getElementById('obavestenja').innerHTML += "Niste uneli naslov obaveštenja!<br/>";
+	}
+	if(MyEditor.getData()==""){
+		da = false;
+		document.getElementById('obavestenja').innerHTML += "Niste uneli tekst obaveštenja!<br/>";
+	}
+
+	if(da)
+		posalji_obav();
+	return false;
+}

@@ -19,13 +19,13 @@
         if(!mysqli_num_rows($result)){
             header("Location: obavestenja");
         }else{
-            $result = mysqli_query($conn,"SELECT * from obavestenje_sajt,korisnik where obavestenje_sajt.autor = korisnik.email and obavestenje_sajt.kategorija='".$_GET['tip']."'");
+            $result = mysqli_query($conn,"SELECT * from obavestenje_sajt,korisnik where obavestenje_sajt.autor = korisnik.email and obavestenje_sajt.kategorija='".$_GET['tip']."' and obavestenje_sajt.datum_objave>='".date_format(date_modify(new DateTime(date("Y-m-d")),"-3 months"),"Y-m-d")."' order by obavestenje_sajt.datum_objave desc");
             while($row = mysqli_fetch_assoc($result)){
                 include('ProjObavZap/ispis_obavestenja.php');
             }
         }
     }else{
-        $result = mysqli_query($conn,"SELECT * from obavestenje_sajt,korisnik where obavestenje_sajt.autor = korisnik.email");
+        $result = mysqli_query($conn,"SELECT * from obavestenje_sajt,korisnik where obavestenje_sajt.autor = korisnik.email and obavestenje_sajt.datum_objave>='".date_format(date_modify(new DateTime(date("Y-m-d")),"-3 months"),"Y-m-d")."' order by obavestenje_sajt.datum_objave desc");
             while($row = mysqli_fetch_assoc($result)){
                 include('ProjObavZap/ispis_obavestenja.php');
             }

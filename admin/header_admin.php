@@ -5,23 +5,17 @@
             <div class='col-sm-7 reklama'>
                 <a href='http://bg.ac.rs' target="_blank" rel="noopener noreferrer" id='link'>Univerzitet u Beogradu</a> <br/>
                 <a href='http://etf.bg.ac.rs' target="_blank" rel="noopener noreferrer" id='link'>Elektrotehnicki fakultet</a> <br/>
-                Katedra za računarsku tahniku i informatiku
+                <a href='/' id='link'>Katedra za računarsku tahniku i informatiku</a>
             </div>
             <div class='col-sm-3' id='login'>
                 <?php
                     
                     if(isset($_SESSION['name'])){
-                        if(($_SESSION['type'] == 'z'))
-                            echo "<a href='nastavnik/profil' id='nastavnik'>";
-                        else if($_SESSION['type']=='a')
-                            echo "<a href='admin/korisnici' id='nastavnik'>";
                         echo $_SESSION['name']." ".$_SESSION['surname']."<br/>";
-                        echo $_SESSION['role']."</br>";
-                        if(($_SESSION['type'] == 'z')||($_SESSION['type'] == 'a'))
-                            echo "</a>";
-                        include('logout.html');
+                        echo $_SESSION['role'];
+                        include('../include/logout.html');
                     }else{
-                        include('login.html');
+                        include('../include/login.html');
                     }
                     if(isset($_SESSION['login_mess']))
                     {

@@ -145,7 +145,7 @@ function dole(d,id){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) 
-			document.getElementById('sadrzaj').innerHTML = this.responseText;
+			document.getElementById('res').innerHTML = this.responseText;
 	};
 	
 	var formData = new FormData( document.getElementById("forma") );
@@ -154,4 +154,125 @@ function dole(d,id){
 	xhttp.open("POST", "predmeti.php");
 	xhttp.send(formData);
 	return false;
+}
+
+
+function dodaj_kat(){
+	if(document.getElementById('nova_kat').value!=''){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200){
+				if(this.responseText=='1'){
+					var option = document.createElement("option");
+					option.text = document.getElementById('nova_kat').value;
+					option.value = document.getElementById('nova_kat').value;
+					document.getElementById("kat").add(option);
+				}
+				document.getElementById('nova_kat').value="";
+			}
+		};
+		var formData = new FormData();
+		formData.append('nova_kat',document.getElementById('nova_kat').value);
+		xhttp.open("POST", "obavestenja.php");
+		xhttp.send(formData);
+	}
+}
+
+
+function posalji_obav(){
+	var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200){
+				if(this.responseText=='1'){
+					document.getElementById('obavestenja').innerHTML = "Uspešno ste dodali obaveštenje!";
+				}
+			}
+		};
+		var formData = new FormData();
+		formData.append('kat',document.getElementById('kat').value);
+		formData.append('naslov',document.getElementById('naslov').value);
+		formData.append('sadrzaj',MyEditor.getData());
+		xhttp.open("POST", "obavestenja.php");
+		xhttp.send(formData);
+}
+
+function dodaj_gr(){
+	document.getElementById('obv1').innerHTML = "";
+	tmp = document.getElementById('vreme').value;
+	if(document.getElementById('predmet1').value=='')
+		document.getElementById('obv1').innerHTML = "<span style='color:red'>Niste odabrali predmet!</span>";
+	else if(document.getElementById('tip').value=='')
+		document.getElementById('obv1').innerHTML = "<span style='color:red'>Niste odabrali tip grupe!</span>";
+	else if(document.getElementById('dan').value=='')
+		document.getElementById('obv1').innerHTML = "<span style='color:red'>Niste odabrali dan u nedelji!</span>";
+	else if(tmp==''){
+		document.getElementById('obv1').innerHTML = "<span style='color:red'>Unesite vreme početka!</span>";
+	}
+	else{
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200){
+				if(this.responseText=='1'){
+					document.getElementById('obv1').innerHTML = "Uspešno ste dodali grupu!";
+					document.getElementById('predmet1').value="";
+					document.getElementById('tip').value = "";
+					document.getElementById('dan').value="";
+					document.getElementById('vreme').value="";
+				}
+			}
+		};
+		var formData = new FormData();
+		formData.append('pred',document.getElementById('predmet1').value);
+		formData.append('tip',document.getElementById('tip').value);
+		formData.append('dan',document.getElementById('dan').value);
+		formData.append('vreme',parseInt(document.getElementById('vreme').value));
+		xhttp.open("POST", "nastavni_plan.php");
+		xhttp.send(formData);
+	}
+}
+
+
+function ispis_gr(){
+	if(document.getElementById('predmet2').value!=''){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200)
+				document.getElementById('grupe').innerHTML = this.responseText;
+		};
+		var formData = new FormData();
+		formData.append('predmet2',document.getElementById('predmet2').value);
+		xhttp.open("POST", "nastavni_plan.php");
+		xhttp.send(formData);
+	}
+	else
+		document.getElementById('grupe').innerHTML = "";
+		document.getElementById('obv2').innerHTML = "";
+}
+
+function dodaj_nas(){
+	tmp = document.getElementById('vreme').value;
+	if(document.getElementById('nastavnik1').value=='')
+		document.getElementById('obv2').innerHTML = "<span style='color:red'>Niste odabrali nastavnika!</span>";
+	else if(document.getElementById('grupa').value=='')
+		document.getElementById('obv2').innerHTML = "<span style='color:red'>Niste odabrali grupu!</span>";
+	else{
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200){
+				if(this.responseText=='1'){
+					document.getElementById('obv2').innerHTML = "Uspešno ste dodali grupu!";
+					document.getElementById('grupe').innerHTML="";
+					document.getElementById('nastavnik1').value = "";
+					document.getElementById('predmet2').value="";
+				}else{
+					document.getElementById('obv2').innerHTML = "Nastavnik je već dodat ovoj grupi!";
+				}
+			}
+		};
+		var formData = new FormData();
+		formData.append('grupa',document.getElementById('grupa').value);
+		formData.append('nastavnik',document.getElementById('nastavnik1').value);
+		xhttp.open("POST", "nastavni_plan.php");
+		xhttp.send(formData);
+	}
 }
