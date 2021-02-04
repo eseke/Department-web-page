@@ -276,3 +276,124 @@ function dodaj_nas(){
 		xhttp.send(formData);
 	}
 }
+
+function ispis_zap(){
+	document.getElementById('obav').innerHTML="";
+	if(document.getElementById('id').value!=''){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200)
+				document.getElementById('sadrzaj').innerHTML = this.responseText;
+		};
+		var formData = new FormData();
+		formData.append('id',document.getElementById('id').value);
+		xhttp.open("POST", "nastavnik.php");
+		xhttp.send(formData);
+	}
+	else
+		document.getElementById('sadrzaj').innerHTML = "";
+}
+
+function dodaj_nasta(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200){
+			if(this.responseText=="1"){
+				document.getElementById('forma').reset();
+				document.getElementById('obav').innerHTML = "Uspešno dodat nastavnik!";
+			}
+			else
+			document.getElementById('obav').innerHTML = "Došlo je do greške pri dodavanju nastavnika!";
+		}
+	};
+	var formData = new FormData(document.getElementById("forma"));
+	xhttp.open("POST", "nastavnik.php");
+	xhttp.send(formData);
+}
+
+function azur_nasta(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200){
+			if(this.responseText=="1"){
+				document.getElementById('obav').innerHTML = "Uspešno ažuriran nastavnik!";
+				document.getElementById(document.getElementById('id').value).text=document.getElementsByName('name')[0].value+' '+document.getElementsByName('surname')[0].value;
+				var tmp1 = document.getElementsByName('username')[0].value;
+				var tmp = tmp1 + "@etf.bg.ac.rs";
+				tmp7 = document.getElementById('id').value;
+				document.getElementById(tmp7).value = tmp;
+				document.getElementById(tmp7).id = tmp;
+				document.getElementsByName('pass')[0].value="";
+			}
+			else
+			document.getElementById('obav').innerHTML = "Došlo je do greške pri ažuriranju nastavnika!";
+		}
+	};
+	var formData = new FormData(document.getElementById("forma"));
+	xhttp.open("POST", "nastavnik.php");
+	xhttp.send(formData);
+}
+
+
+function ispis_stud(){
+	document.getElementById('obav').innerHTML="";
+	if(document.getElementById('id').value!=''){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200)
+				document.getElementById('sadrzaj').innerHTML = this.responseText;
+		};
+		var formData = new FormData();
+		formData.append('id',document.getElementById('id').value);
+		xhttp.open("POST", "student.php");
+		xhttp.send(formData);
+	}
+	else
+		document.getElementById('sadrzaj').innerHTML = "";
+}
+
+function dodaj_studa(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200){
+			if(this.responseText=="1"){
+				document.getElementById('forma').reset();
+				document.getElementById('obav').innerHTML = "Uspešno dodat student!";
+			}
+			else
+			document.getElementById('obav').innerHTML = "Došlo je do greške pri dodavanju studenta!";
+		}
+	};
+	var formData = new FormData(document.getElementById("forma"));
+	xhttp.open("POST", "student.php");
+	xhttp.send(formData);
+}
+
+function azur_studa(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200){
+			if(this.responseText=="1"){
+				document.getElementById('obav').innerHTML = "Uspešno ažuriran student!";
+				document.getElementById(document.getElementById('id').value).text=document.getElementsByName('name')[0].value+' '+document.getElementsByName('surname')[0].value;
+				var tmp1 = document.getElementsByName('surname')[0].value[0].toLowerCase();
+				var tmp2 = document.getElementsByName('name')[0].value[0].toLowerCase();
+				var tmp3 = document.getElementsByName('indeks')[0].value.split('/')[0][2];
+				var tmp4 = document.getElementsByName('indeks')[0].value.split('/')[0][3];
+				var tmp5 = document.getElementsByName('indeks')[0].value.split('/')[1];
+				var tmp6 = document.getElementsByName('tip_studija')[0].value;
+				var tmp = tmp1 + tmp2 + tmp3 + tmp4 + tmp5 + tmp6 + "@student.etf.rs";
+				tmp7 = document.getElementById('id').value;
+				document.getElementById(tmp7).value = tmp;
+				document.getElementById(tmp7).id = tmp;
+				document.getElementsByName('pass')[0].value="";
+				tmp8 = 1;
+			}
+			else
+			document.getElementById('obav').innerHTML = "Došlo je do greške pri ažuriranju studenta!";
+		}
+	};
+	var formData = new FormData(document.getElementById("forma"));
+	xhttp.open("POST", "student.php");
+	xhttp.send(formData);
+}

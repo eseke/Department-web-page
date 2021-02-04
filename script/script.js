@@ -4,8 +4,8 @@ function fja(){
 	for(var i=0;i<fileElement.files.length;i++){
 	document.getElementById('imena').innerHTML +="<input type='tekst' id='fajl"+i+"' name='fajl"+i+"'>"+fileElement.files[i].name+"<br/>";
 	}
-	if(document.getElementById('odabir_sekc').value!='info')
-	document.getElementById('imena').innerHTML +="<input type='submit' value='Dodaj fajlove' onclick='return dodajFajlove()'><br/>";
+	if(document.getElementById('odabir_sekc') && document.getElementById('odabir_sekc').value!='info')
+		document.getElementById('imena').innerHTML +="<input type='submit' value='Dodaj fajlove' onclick='return dodajFajlove()'><br/>";
 	
 }
 
@@ -107,5 +107,135 @@ function dodaj_obav(){
 
 	if(da)
 		posalji_obav();
+	return false;
+}
+
+function azur_nast(){
+	document.getElementById('obav').innerHTML = "";
+	var da = true;
+	if(document.getElementsByName('name')[0].value==''){
+		document.getElementById('obav').innerHTML += "Ime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('surname')[0].value==''){
+		document.getElementById('obav').innerHTML += "Prezime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('adresa')[0].value==''){
+		document.getElementById('obav').innerHTML += "Adresa mora biti uneta!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('mobilni')[0].value!='' && isNaN(document.getElementsByName('mobilni')[0].value)){
+		document.getElementById('obav').innerHTML += "Niste pravilno uneli broj telefona!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('zvanje')[0].value==''){
+		document.getElementById('obav').innerHTML += "Niste odabrali zvanje!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('kabinet')[0].value==''){
+		document.getElementById('obav').innerHTML += "Niste uneli broj kabineta!<br/>";
+		da = false;
+	}
+	if(da)
+		azur_nasta();
+	return false;
+}
+
+function dodaj_nast(){
+	document.getElementById('obav').innerHTML = "";
+	var da = true;
+	if(document.getElementsByName('username')[0].value==''){
+		document.getElementById('obav').innerHTML += "Korisničko ime mora biti uneta!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('pass')[0].value==''){
+		document.getElementById('obav').innerHTML += "Inicijalna šifra mora biti uneta!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('name')[0].value==''){
+		document.getElementById('obav').innerHTML += "Ime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('surname')[0].value==''){
+		document.getElementById('obav').innerHTML += "Prezime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('adresa')[0].value==''){
+		document.getElementById('obav').innerHTML += "Adresa mora biti uneta!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('mobilni')[0].value!='' && isNaN(document.getElementsByName('mobilni')[0].value)){
+		document.getElementById('obav').innerHTML += "Niste pravilno uneli broj telefona!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('zvanje')[0].value==''){
+		document.getElementById('obav').innerHTML += "Niste odabrali zvanje!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('kabinet')[0].value==''){
+		document.getElementById('obav').innerHTML += "Niste uneli broj kabineta!<br/>";
+		da = false;
+	}
+	if(da)
+		dodaj_nasta();
+
+	return false;
+}
+
+function azur_stud(){
+	document.getElementById('obav').innerHTML = "";
+	var da = true;
+	var ind = document.getElementsByName('indeks')[0].value.split("/");
+	var tip_st = document.getElementsByName('tip_studija')[0].value;
+	if(ind.length!=2 || isNaN(ind[0])|| isNaN(ind[1])||ind[0].length!=4||ind[1].length!=4||(tip_st=='d'&&ind[1][0]!='0')||(tip_st=='m'&&ind[1][0]!='3')||(tip_st=='p'&&ind[1][0]!='5')){
+		document.getElementById('obav').innerHTML += "Broj indeksa nije ispravan!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('name')[0].value==''){
+		document.getElementById('obav').innerHTML += "Ime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('surname')[0].value==''){
+		document.getElementById('obav').innerHTML += "Prezime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('tip_studija')[0].value==''){
+		document.getElementById('obav').innerHTML += "Niste odabrali tip studija!<br/>";
+		da = false;
+	}
+	if(da)
+		azur_studa();
+	return false;
+}
+
+function dodaj_stud(){
+	document.getElementById('obav').innerHTML = "";
+	var da = true;
+	if(document.getElementsByName('pass')[0].value==''){
+		document.getElementById('obav').innerHTML += "Inicijalna šifra mora biti uneta!<br/>";
+		da = false;
+	}
+	var ind = document.getElementsByName('indeks')[0].value.split("/");
+	var tip_st = document.getElementsByName('tip_studija')[0].value;
+	if(ind.length!=2 || isNaN(ind[0])|| isNaN(ind[1])||ind[0].length!=4||ind[1].length!=4||(tip_st=='d'&&ind[1][0]!='0')||(tip_st=='m'&&ind[1][0]!='3')||(tip_st=='p'&&ind[1][0]!='5')){
+		document.getElementById('obav').innerHTML += "Broj indeksa nije ispravan!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('name')[0].value==''){
+		document.getElementById('obav').innerHTML += "Ime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('surname')[0].value==''){
+		document.getElementById('obav').innerHTML += "Prezime mora biti uneto!<br/>";
+		da = false;
+	}
+	if(document.getElementsByName('tip_studija')[0].value==''){
+		document.getElementById('obav').innerHTML += "Niste odabrali tip studija!<br/>";
+		da = false;
+	}
+	if(da)
+		dodaj_studa();
+
 	return false;
 }
