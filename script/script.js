@@ -239,3 +239,19 @@ function dodaj_stud(){
 
 	return false;
 }
+
+function change_pass(){
+	document.getElementById('obav').innerHTML = "";
+	var da = true;
+	if(document.getElementById('old_pass').value==''||document.getElementById('new_pass1').value==''||document.getElementById('new_pass2').value==''){
+		document.getElementById('obav').innerHTML += "Šifra ne može biti prazna!<br/>";
+		da = false;
+	}
+	if(document.getElementById('new_pass1').value!=document.getElementById('new_pass2').value){
+		document.getElementById('obav').innerHTML += "Na oba polja treba da upišete istu novu šifru!<br/>";
+		da = false;
+	}
+	if(da)
+		change_passa();
+	return false;
+}

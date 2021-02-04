@@ -1,0 +1,11 @@
+<?php
+	unset($_SESSION['name']);
+	unset($_SESSION['surname']);
+	unset($_SESSION['role']);
+	unset($_SESSION['email']);
+	unset($_SESSION['type']);
+	if(isset($_SESSION['first']))
+		unset($_SESSION['first']);
+	if(isset($_SESSION['tip_studija']));
+		unset($_SESSION['tip_studija']);
+?>

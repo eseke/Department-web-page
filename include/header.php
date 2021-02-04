@@ -20,6 +20,8 @@
                         if(($_SESSION['type'] == 'z')||($_SESSION['type'] == 'a'))
                             echo "</a>";
                         include('logout.html');
+                        if(!isset($passpage))
+                            echo "<a href = '/password' id='nastavnik'>Promenti lozinku</a>";
                     }else{
                         include('login.html');
                     }

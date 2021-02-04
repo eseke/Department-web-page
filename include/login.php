@@ -1,13 +1,12 @@
 <?php
     
     if(isset($_POST['logout'])){
-        unset($_SESSION['name']);
-        unset($_SESSION['surname']);
-        unset($_SESSION['role']);
-        unset($_SESSION['email']);
-        if(isset($_SESSION['tip_studija']));
-           unset($_SESSION['tip_studija']);
+        include_once('logout.php');
         header("Location: #");
+    }
+    else if(isset($_SESSION['first'])&& !isset($passpage)){
+        header('Location:/password');
+
     }elseif(isset($_POST['login'])){
         include('db_conn.php');
         $result = mysqli_query($conn, "select * from korisnik where email='".$_POST['username']."' and pass='".$_POST['pass']."'");
@@ -17,6 +16,9 @@
             $_SESSION['surname'] = $row['surname'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['type'] = $row['type'];
+            if($row['first_access']){
+                $_SESSION['first'] = true;
+            }
             if($row['type']=="a")
                 $_SESSION['role'] = 'Administrator';
             elseif($row['type']=="s"){
@@ -39,6 +41,12 @@
             $_SESSION['login_mess'] = "Nisu dobri podaci";
         }
         include('db_disconn.php');
+        
+        if($_SESSION['first']){
+            header('Location:/password');
+        }
+        else{
         header("Location: #");
+        }
     }
     ?>
