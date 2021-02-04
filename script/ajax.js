@@ -410,3 +410,15 @@ function change_passa(){
 	xhttp.open("POST", "password.php");
 	xhttp.send(formData);
 }
+
+function fajl_stud(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200){
+			document.getElementById('obav').innerHTML = this.responseText;
+		}
+	};
+	var formData = new FormData(document.getElementById("forma"));
+	xhttp.open("POST", "korisnici.php");
+	xhttp.send(formData);
+}

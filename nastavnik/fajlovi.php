@@ -2,6 +2,12 @@
 	include('../include/db_conn.php');
 	$result = mysqli_query($conn,"select * from materijali,korisnik where materijali.sifra_predmeta='".$_POST['odabir_pred']."' and materijali.tip_materijala='".$_POST['odabir_sekc']."' and materijali.id_nastavnika=korisnik.email order by materijali.redosled");
 	echo "<table>";
+	echo "<th>Ime</th>";
+	echo "<th>Tip</th>";
+	echo "<th>Datum</th>";
+	echo "<th>Veličina</th>";
+	echo "<th>Dodao</th>";
+	echo "<th>Vidljivo</th>";
 	$num = mysqli_num_rows($result);
 	for($i = 0;$i<$num;$i++){
 		$row=mysqli_fetch_assoc($result);
@@ -10,6 +16,7 @@
 		echo "<td>".end($tmp)."</td>";
 		$tmp = explode('-',$row['datum']);
 		echo "<td>".$tmp[2].".".$tmp[1].".".$tmp[0].".</td>";
+		echo "<td>&nbsp;".number_format(filesize($row['putanja'])/1024,2)." KB </td>";
 		echo "<td>".$row['name']." ".$row['surname']."</td>";
 		echo "<td><input type='checkbox'".($row['vidljiv']?"checked":"")." name='".$row['id_materijal']."' onchange='return vidi(this);'></td>";
 		if($i==0)

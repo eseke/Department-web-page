@@ -8,6 +8,13 @@ if(!mysqli_num_rows($result))
 $row = mysqli_fetch_assoc($result);
 if(!$row['status'])
     header("Location: zaposleni");
+echo "<table>";
+echo "<tr><td>";
+if($row['profilna_slika']=="")
+    echo "<img width='150px' src='https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg' >";
+else
+    echo "<img width='150px' src=".$row["profilna_slika"]." >";
+echo "</td><td>";
 echo "<title>".$row['name']." ".$row['surname']."</title>";
 echo "Ime: ".$row['name']."<br/>";
 echo "Prezime: ".$row['surname']."<br/>";
@@ -15,8 +22,8 @@ echo "Email: ".$row['email']."<br/>";
 echo "Zvanje: ".$row['zvanje']."<br/>";
 echo "Kabinet: ".$row['broj_kabineta']."<br/>";
 echo "Biografija: ".$row['biografija']."<br/>";
-echo "<img width='150px' src=".$row["profilna slika"]." >";
-
+echo "</td></tr>";
+echo "</table>";
 include('./include/db_disconn.php');
 
 ?>
