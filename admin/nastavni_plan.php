@@ -25,7 +25,7 @@ else{
     <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel="stylesheet" href="../style/style.css">
 	<script src='../script/ajax.js'></script>
-    <title>Kontakt</title>
+    <title>Nastavni plan</title>
 </head>
 
 <body>

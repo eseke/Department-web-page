@@ -20,7 +20,7 @@
 			<script src='../script/script.js'></script>
 			<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
 			
-			<title>Kontakt</title>
+			<title>Opšta obaveštenja</title>
 		</head>
 
 		<body>

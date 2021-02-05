@@ -386,6 +386,7 @@ function azur_studa(){
 				tmp7 = document.getElementById('id').value;
 				document.getElementById(tmp7).value = tmp;
 				document.getElementById(tmp7).id = tmp;
+				document.getElementById('em').innerHTML = tmp;
 				document.getElementsByName('pass')[0].value="";
 				tmp8 = 1;
 			}

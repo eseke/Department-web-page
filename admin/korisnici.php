@@ -23,7 +23,7 @@ if(isset($_FILES['fajl'])){
 <head>
     <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel="stylesheet" href="../style/style.css">
-    <title>Kontakt</title>
+    <title>Korisnici</title>
 	<script src="../script/ajax.js"></script>
 </head>
 

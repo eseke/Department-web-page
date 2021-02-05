@@ -7,7 +7,7 @@ if(isset($_POST['old_pass'])){
     if($row['pass']!=$_POST['old_pass'])
         echo "Nije dobra stara šifra!";
     else{
-        if(mysqli_query($conn,"update korisnik set pass='".$_POST['new_pass1']."' where email='".$_SESSION['email']."'")){
+        if(mysqli_query($conn,"update korisnik set first_access=0, pass='".$_POST['new_pass1']."' where email='".$_SESSION['email']."'")){
             echo "Uspešno je promenjena šifra!";
             include_once('include/logout.php');
         }
@@ -19,7 +19,7 @@ if(isset($_POST['old_pass'])){
 else{
 ?>
 <head>
-    <title>Početna</title>
+    <title>Promeni šifre</title>
 
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/style.css">

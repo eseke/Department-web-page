@@ -21,7 +21,10 @@ echo "Prezime: ".$row['surname']."<br/>";
 echo "Email: ".$row['email']."<br/>";
 echo "Zvanje: ".$row['zvanje']."<br/>";
 echo "Kabinet: ".$row['broj_kabineta']."<br/>";
-echo "Biografija: ".$row['biografija']."<br/>";
+if($row['biografija']!="")
+    echo "Biografija: ".$row['biografija']."<br/>";
+if($row['licni_sajt'])
+    echo "Lični sajt: <a href='".$row['licni_sajt']."'>".$row['licni_sajt']."</a>";
 echo "</td></tr>";
 echo "</table>";
 include('./include/db_disconn.php');

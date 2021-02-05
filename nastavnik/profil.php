@@ -1,7 +1,7 @@
 <head>
     <link rel="stylesheet" href="../style/bootstrap.min.css">
     <link rel="stylesheet" href="../style/style.css">
-    <title>Kontakt</title>
+    <title>Profil</title>
 </head>
 
 <body>

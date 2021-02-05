@@ -1,32 +1,34 @@
 <?php
 #var_dump($_POST);
+include_once("../include/db_conn.php");
+if(isset($_POST['obrisi'])){
+	mysqli_query($conn,"delete from korisnik where email='".$_POST['id']."'");
+	mysqli_query($conn,"delete from student where email='".$_POST['id']."'");
+	include_once('../include/db_disconn.php');
+	header('Location:#');
+}
 if(isset($_POST['id']) && isset($_POST['name'])){
-	include_once("../include/db_conn.php");
 	$ind = explode('/',$_POST['indeks']);
 	$email = strtolower($_POST['surname'][0]).strtolower($_POST['name'][0]).$ind[0][2].$ind[0][3].$ind[1].$_POST['tip_studija']."@student.etf.rs";
 	$res1 = mysqli_query($conn,"update korisnik set email='".$email."',".($_POST['pass']!=''?"pass='".$_POST['pass']."',":"")."name='".$_POST['name']."',surname='".$_POST['surname']."',status='".(isset($_POST['status'])?"1":"0")."',type='s' where email='".$_POST['id']."'");
 	$res2 = mysqli_query($conn,"update student set email='".$email."',indeks = '".$_POST['indeks']."',tip_studija='".$_POST['tip_studija']."' where email='".$_POST['id']."'");
 	if($res1 && $res2)
 		echo "1";
-	include_once("../include/db_disconn.php");
 }
 elseif(isset($_POST['name'])){
-	include_once("../include/db_conn.php");
 	$ind = explode('/',$_POST['indeks']);
 	$email = $_POST['surname'][0].$_POST['name'][0].$ind[0][2].$ind[0][3].$ind[1].$_POST['tip_studija']."@student.etf.rs";
 	$res1 = mysqli_query($conn,"insert into korisnik (email,pass,name,surname,status,first_access,type) values ('".$email."','".$_POST['pass']."','".$_POST['name']."','".$_POST['surname']."','".(isset($_POST['status'])?"1":"0")."',1,'s')");
 	$res2 = mysqli_query($conn,"insert into student(email,indeks,tip_studija) values('".$email."','".$_POST['indeks']."','".$_POST['tip_studija']."')");
 	if($res1 && $res2)
 		echo "1";
-	include_once("../include/db_disconn.php");
 }
 
 else if(isset($_POST['id'])){
-	include_once('../include/db_conn.php');
 	$result = mysqli_query($conn,"select * from student, korisnik where student.email=korisnik.email and student.email='".$_POST['id']."'");
 	$row = mysqli_fetch_assoc($result);
 	echo "<table>";
-	echo "<tr><td>Email:</td><td>".$row['email']."</td></tr>";
+	echo "<tr><td>Email:</td><td><div id='em'>".$row['email']."</div></td></tr>";
 	echo "<tr><td>Nova šifra:</td><td><input type='pass' name='pass'></tr>";
 	echo "<tr><td>Ime:</td><td><input type='text' name='name' value='".$row['name']."'></tr>";
 	echo "<tr><td>Prezime:</td><td><input type='text' name='surname' value='".$row['surname']."'><br/>";
@@ -41,7 +43,8 @@ else if(isset($_POST['id'])){
 	";
 	echo "<tr><td>Status:</td><td><input type='checkbox' name='status' ".($row['status']?"checked":"")."></tr>";
 	echo "</table>";
-	echo "<input type='submit' value='Ažuriraj' name='dodaj' onclick='return azur_stud();'><br/>";
+	echo "<input type='submit' value='Ažuriraj' name='dodaj' onclick='return azur_stud();'>";
+	echo "<input type='submit' name='obrisi' value='Obriši studenta'><br/>";
 
 }else{
 ?>
@@ -50,7 +53,7 @@ else if(isset($_POST['id'])){
     <link rel="stylesheet" href="../style/style.css">
 	<script src="../script/ajax.js"></script>
 	<script src="../script/script.js"></script>
-    <title>Kontakt</title>
+    <title>Studenti</title>
 </head>
 
 <body>
@@ -61,18 +64,18 @@ else if(isset($_POST['id'])){
 	header('Content-type: text/html; charset=utf-8');
 	if(!isset($_SESSION['email'])|| !($_SESSION['type'] == 'a'))
 		header('Location: ../');
-	include('../include/db_conn.php');
 	include('header_admin.php');
 	include('menu_admin.html');
 	include('../include/login.php');
 	if(!isset($_GET['tip']) || !($_GET['tip']=='nov'||$_GET['tip']=='azuriraj'))
 		header('Location:korisnici');
 	?>
-	<form id='forma' action='' type='post'>
+	<form id='forma' action='' method='post'>
 	
 	<?php 
 		if($_GET['tip']=='azuriraj'){
 	?>
+	<h5>Ažuriranje studenta</h5>
 	Odaberi studenta: <select id='id' name='id' onchange="ispis_stud()">
 	<option value=''></option>
 	<?php
@@ -85,6 +88,7 @@ else if(isset($_POST['id'])){
 	}else{		
 	?>
 	
+	<h5>Dodavanje novog studenta</h5>
 	<table>
 	<tr><td>Šifra:</td><td><input type='password' name='pass' id='pass'></tr>
 	<tr><td>Broj indeksa:</td><td><input type='text' name='indeks' id='indeks'></tr>
@@ -104,11 +108,11 @@ else if(isset($_POST['id'])){
 	echo "</form>";
 	echo "<div id='obav'></div>";
 	include('../include/footer.html');
-	include('../include/db_disconn.php');
 ?>
 
 	</div>
 </doby>
 <?php
 }
+include_once('../include/db_disconn.php');
 ?>

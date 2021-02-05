@@ -14,6 +14,11 @@
 	include('include/menu.html');
 
 	include('include/db_conn.php');
+	if(isset($_SESSION['email'])&&isset($_GET['zaprati'])){
+		mysqli_query($conn,"insert into prati_predmet(id_student, sifra_predmet) values('".$_SESSION['email']."','".$_GET['zaprati']."')");
+	}else if(isset($_SESSION['email'])&&isset($_GET['otprati'])){
+		mysqli_query($conn,"delete from prati_predmet where id_student='".$_SESSION['email']."' and sifra_predmet='".$_GET['otprati']."'");
+	}
 	$hash = [];
 	if(isset($_SESSION['role']) && $_SESSION['role']=='Student osnovnih studija'){
 		echo "<h4>Moji predmeti</h4>";
@@ -21,7 +26,7 @@
 		if(mysqli_num_rows($result)){
 			while($row = mysqli_fetch_assoc($result)){
 				$hash[$row['sifra_predmeta']] = true;
-				echo " &nbsp &nbsp<a href='predmet?sifra=".$row['sifra_predmeta']."'>".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']."</a><br/>";
+				echo " &nbsp &nbsp<a href='predmet?sifra=".$row['sifra_predmeta']."'>".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']."</a> &nbsp<a href='?otprati=".$row['sifra_predmeta']."'>Otprati</a><br/>";
 			}
 		}
 		else
@@ -50,7 +55,7 @@
 			
 				$hash[$row['sifra_predmeta']] = true;
 				if(isset($_SESSION['role']) && $_SESSION['role']=='Student osnovnih studija')
-					echo " &nbsp &nbsp<a href='predmet?sifra=".$row['sifra_predmeta']."'>".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']."</a><br/>";
+					echo " &nbsp &nbsp".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']."&nbsp<a href='?zaprati=".$row['sifra_predmeta']."'>Zaprati</a><br/>";
 				else
 					echo " &nbsp &nbsp".$row['sifra_predmeta']." ".$row['naziv']." ".$row['fond_casova']."<br/>";
 			}

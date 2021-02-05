@@ -193,9 +193,23 @@ function dodaj_nast(){
 		document.getElementById('obav').innerHTML += "Niste uneli broj kabineta!<br/>";
 		da = false;
 	}
-	if(da)
-		dodaj_nasta();
-
+	if(document.getElementsByName('slika')[0].value!=''){
+		var img = new Image();
+		img.onload = function(){
+		
+			if(this.width>300||this.height>300){
+				document.getElementById('obav').innerHTML += "Slika je prevelika!<br/>";
+				da = false;
+			}
+			if(da)
+				dodaj_nasta();
+		};
+		img.src = document.getElementsByName('slika')[0].value;
+	}
+	else{
+		if(da)
+			dodaj_nasta();
+	}
 	return false;
 }
 
