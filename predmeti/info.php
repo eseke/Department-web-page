@@ -21,7 +21,9 @@
 	}
 	echo "Raspored nastave:";
 	//dinamicko ispisivanje informacija o grupama na predmetu, terminima nastave i nastavnicima
-	$res1 = mysqli_query($conn,"select zaposleni.id,grupa.oznaka,grupa.dan,grupa.vreme,korisnik.name,korisnik.surname from drzi_predmet,grupa,korisnik,zaposleni where grupa.sifra_predmeta='".$_GET['sifra']."' and grupa.id=drzi_predmet.id_grupe and drzi_predmet.id_nastavnika=korisnik.email and zaposleni.email=drzi_predmet.id_nastavnika order by grupa.oznaka asc");
-	while($row1 = mysqli_fetch_assoc($res1))
+	$res1 = mysqli_query($conn,"select korisnik.status,zaposleni.id,grupa.oznaka,grupa.dan,grupa.vreme,korisnik.name,korisnik.surname from drzi_predmet,grupa,korisnik,zaposleni where grupa.sifra_predmeta='".$_GET['sifra']."' and grupa.id=drzi_predmet.id_grupe and drzi_predmet.id_nastavnika=korisnik.email and zaposleni.email=drzi_predmet.id_nastavnika order by grupa.oznaka asc");
+	while($row1 = mysqli_fetch_assoc($res1)){
+		if($row1['status'])
 			echo "<br/>&nbsp &nbsp".$row1['oznaka']." ".$row1['dan']." ".$row1['vreme']." <a href='zaposleni?id=".$row1['id']."'>".$row1['name']." ".$row1['surname']."</a>";
+	}
 ?>

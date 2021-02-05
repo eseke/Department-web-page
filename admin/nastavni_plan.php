@@ -72,7 +72,8 @@ else{//ucitavanje stranice
 	echo "Izaberite nastavnika:<select id='nastavnik1'>";
 	echo "<option value=''></option>";
 	while($row=mysqli_fetch_assoc($result))
-		echo "<option value='".$row['email']."'>".$row['name']." ".$row['surname']."</option>";
+		if($row['status'])
+			echo "<option value='".$row['email']."'>".$row['name']." ".$row['surname']."</option>";
 	echo "<select/><br/>";
 
 	$result = mysqli_query($conn,"select distinct grupa.sifra_predmeta,predmet.naziv from grupa,predmet where grupa.sifra_predmeta=predmet.sifra_predmeta");
