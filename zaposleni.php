@@ -12,9 +12,9 @@
     include('include/login.php');
     include('include/menu.html');
 
-    if(isset($_GET['id'])){
+    if(isset($_GET['id'])){//ukoliko je odabran jedan nastavnik o se ispisuje
        include('ProjObavZap/zaposleni_jedan.php');
-    }else
+    }else//isis svih zaposlenih
         include('ProjObavZap/zaposleni_svi.php');
 
     include('include/footer.html');

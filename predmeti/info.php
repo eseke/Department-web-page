@@ -1,4 +1,5 @@
 <?php
+	//ispisivanje informacija o predmentu
 	$res = mysqli_query($conn,"select * from predmet where sifra_predmeta='".$_GET['sifra']."'");
 	$row = mysqli_fetch_assoc($res);
 	echo "Broj ESPB: ".$row['broj_ESPB']."</br>";
@@ -19,6 +20,7 @@
 		echo $row1['semestar']." semestar ".$row1['naziv_odseka']."</br>";
 	}
 	echo "Raspored nastave:";
+	//dinamicko ispisivanje informacija o grupama na predmetu, terminima nastave i nastavnicima
 	$res1 = mysqli_query($conn,"select zaposleni.id,grupa.oznaka,grupa.dan,grupa.vreme,korisnik.name,korisnik.surname from drzi_predmet,grupa,korisnik,zaposleni where grupa.sifra_predmeta='".$_GET['sifra']."' and grupa.id=drzi_predmet.id_grupe and drzi_predmet.id_nastavnika=korisnik.email and zaposleni.email=drzi_predmet.id_nastavnika order by grupa.oznaka asc");
 	while($row1 = mysqli_fetch_assoc($res1))
 			echo "<br/>&nbsp &nbsp".$row1['oznaka']." ".$row1['dan']." ".$row1['vreme']." <a href='zaposleni?id=".$row1['id']."'>".$row1['name']." ".$row1['surname']."</a>";

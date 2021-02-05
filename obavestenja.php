@@ -14,17 +14,17 @@
     include('include/menu.html');
     include('ProjObavZap/menu_obav.php');
     include('include/db_conn.php');
-    if(isset($_GET['tip'])){
+    if(isset($_GET['tip'])){//Ukoliko je odabran tip materijala samo se ispisuju odgovarajuci materijali
         $result = mysqli_query($conn,"SELECT * from kategorija_obavestenja where kategorija_obavestenja.naziv='".$_GET['tip']."'");
         if(!mysqli_num_rows($result)){
             header("Location: obavestenja");
         }else{
             $result = mysqli_query($conn,"SELECT * from obavestenje_sajt,korisnik where obavestenje_sajt.autor = korisnik.email and obavestenje_sajt.kategorija='".$_GET['tip']."' and obavestenje_sajt.datum_objave>='".date_format(date_modify(new DateTime(date("Y-m-d")),"-3 months"),"Y-m-d")."' order by obavestenje_sajt.datum_objave desc");
             while($row = mysqli_fetch_assoc($result)){
-                include('ProjObavZap/ispis_obavestenja.php');
+                include('ProjObavZap/ispis_obavestenja.php');//Pomocna funkcija za ispisivanje obavestenja
             }
         }
-    }else{
+    }else{//Ispisivanje svih obavestenja
         $result = mysqli_query($conn,"SELECT * from obavestenje_sajt,korisnik where obavestenje_sajt.autor = korisnik.email and obavestenje_sajt.datum_objave>='".date_format(date_modify(new DateTime(date("Y-m-d")),"-3 months"),"Y-m-d")."' order by obavestenje_sajt.datum_objave desc");
             while($row = mysqli_fetch_assoc($result)){
                 include('ProjObavZap/ispis_obavestenja.php');

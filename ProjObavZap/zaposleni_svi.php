@@ -1,6 +1,7 @@
 <?php
     echo "<title>Zaposleni</title>";
     include('./include/db_conn.php');
+    //Pretraga svih veza zaposleni-premdmet
     $result = mysqli_query($conn,'SELECT DISTINCT `korisnik`.`status`,`predmet`.`aktivan`,`korisnik`.`name`,`korisnik`.`surname`,`zaposleni`.`email`,`predmet`.`naziv`,'.
     '`predmet`.`sifra_predmeta`,`zaposleni`.`zvanje`,`zaposleni`.`id` FROM `zaposleni`,`drzi_predmet`,`predmet`,`korisnik`,grupa WHERE `zaposleni`.`email`=`drzi_predmet`.`id_nastavnika`'.
     ' and drzi_predmet.id_grupe=grupa.id and grupa.sifra_predmeta=predmet.sifra_predmeta and `zaposleni`.`email`=`korisnik`.`email` order by `zaposleni`.`email` asc');
@@ -19,10 +20,11 @@
             echo '&nbsp &nbsp'.$row['sifra_predmeta'].' '.$row['naziv'].'<br/>';
         }
     }
+    //ispis svih nastavnika bez predmeta
     $result = mysqli_query($conn,'SELECT `korisnik`.`status`,`korisnik`.email,`korisnik`.`name`,`korisnik`.`surname`,`zaposleni`.`zvanje`,`zaposleni`.`id` FROM `korisnik`,`zaposleni` WHERE `korisnik`.`email`=`zaposleni`.`email`');
     if(mysqli_num_rows($result)){
         while($row = mysqli_fetch_assoc($result)){
-            if(!$row['status'])
+            if(!$row['status'])//preskace se zaposleni bez aktivnog statusa
                 continue;
             if(!isset($arr[$row['email']])){
                 echo "<a href='zaposleni?id=".$row['id']."'>".$row['name'].' '.$row['surname'].'</a> '.$row['zvanje'].'<br/>';

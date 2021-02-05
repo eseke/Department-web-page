@@ -1,6 +1,8 @@
 <?php
 session_start();
 if(isset($_POST['old_pass'])){
+    //Post upit za promenu šifre, ukoliko je uspešan korisnicima koji se prvi put loguju se omgu'uje dalji rad sa sistemom
+    //Posle promene šifre korisnik će biti automatski izlogovan
     include('include/db_conn.php');
     $result = mysqli_query($conn,"select * from korisnik where email='".$_SESSION['email']."'");
     $row = mysqli_fetch_assoc($result);
@@ -41,6 +43,9 @@ else{
 		include('include/menu.html');
     ?>
     <form id='forma' type='post'action=''>
+    <!-- 
+        forma za promenu šifre''
+    -->
     <table>
     <tr><td>Trenutna šifra:</td><td><input type='password' id='old_pass' name='old_pass'></td></tr>
     <tr><td>Nova šifra:</td><td><input type='password' id='new_pass1' name='new_pass1'></td></tr>

@@ -1,4 +1,7 @@
 <head>
+    <!--
+    Header svake stranice sadrzi naziv stranice, putanje do fajlova od kojih zavisi. I skripte za pokretanje ugradjenih elemenata.
+    -->
     <title>Početna</title>
 
     <link rel="stylesheet" href="style/bootstrap.min.css">
@@ -41,6 +44,9 @@
         pulvinar neque. Amet nulla facilisi morbi tempus iaculis.
         </div>
     </div>
+    <!---
+    U nastavku se nalazi slajder sa slikama.
+    -->
     <div class="splide">
         <div class="splide__track">
             <ul class="splide__list">

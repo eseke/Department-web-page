@@ -1,4 +1,8 @@
 function fja(){
+	/*
+	Provera formi.
+	u slučaju da je forma dobra vrši se ajax poziv ili klasičan post ili get zahtev.
+	*/
 	var fileElement = document.getElementById('fajlovi');
 	document.getElementById('imena').innerHTML = "Dodajte nazive odabranih fajlova:<br/>";
 	for(var i=0;i<fileElement.files.length;i++){

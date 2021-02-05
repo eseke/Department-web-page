@@ -2,7 +2,10 @@
     <div class='col-sm-12' id = 'menu'>
         <a href = 'projekti'>Svi</a>
         <?php
-            
+            /*
+        podmeni dela sajta za projekte
+        kategorije projekata se čitaju iz baze
+        */
         include('./include/db_conn.php');
         $result = mysqli_query($conn,'SELECT * from kategorija_projekta');
         while($row = mysqli_fetch_assoc($result)){

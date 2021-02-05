@@ -1,9 +1,11 @@
 <?php
 function ispis_obav($sifra,$izm){
+	//ispis obavestenja vezanih za predmet
+	//ako je $izm = true omogucena je izmena obavestena nastavniku
 	include($_SERVER['DOCUMENT_ROOT']."/include/db_conn.php");
 	$result = mysqli_query($conn,"select * from obavestenje_predmet,korisnik where obavestenje_predmet.id_predmeta='".$sifra."' and korisnik.email=obavestenje_predmet.id_nastavnika");
-	while($row = mysqli_fetch_assoc($result)){
-		if(((time()-strtotime($row['datum_objave']))/(60*60*24))>7)
+	while($row = mysqli_fetch_assoc($result)){//prolazak kroz sva obavestenja vezana za predmet
+		if(((time()-strtotime($row['datum_objave']))/(60*60*24))>7)//ukoliko je obavestenje starije od 7 dana ono je drugacije ispisano
 			echo "<div id='davno'>";
 		else
 			echo "<div>";

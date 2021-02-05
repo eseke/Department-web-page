@@ -1,9 +1,9 @@
 <?php
-if(isset($_POST['nastavnik'])){
+if(isset($_POST['nastavnik'])){//ajax dodavanje nastavnika na grupu
 	include_once('../include/db_conn.php');
 	echo mysqli_query($conn,"insert into drzi_predmet(id_nastavnika,id_grupe) values('".$_POST['nastavnik']."',".$_POST['grupa'].")");
 }
-else if(isset($_POST['predmet2'])){
+else if(isset($_POST['predmet2'])){//ajax ucitavanje grupa na predmetu
 	include_once('../include/db_conn.php');
 	$result = mysqli_query($conn,"select * from grupa where sifra_predmeta='".$_POST['predmet2']."'");
 	echo "Izaberite grupu: <select id='grupa'>";
@@ -13,13 +13,13 @@ else if(isset($_POST['predmet2'])){
 	echo "</select><br/>";
 	echo "<input type='submit' value='Dodaj' onclick='return dodaj_nas();'>";
 }
-else if(isset($_POST['tip'])){
+else if(isset($_POST['tip'])){//dodavanje nove grupe na predmet
 	include_once('../include/db_conn.php');
 	$result = mysqli_query($conn,"select * from grupa where sifra_predmeta='".$_POST['pred']."' and oznaka like '".($_POST['tip']=='predavanja'?'P':'V')."%'");
 	$res = mysqli_num_rows($result);
 	echo mysqli_query($conn,"insert into grupa(sifra_predmeta,oznaka,dan,vreme) values ('".$_POST['pred']."','".($_POST['tip']=='predavanja'?'P':'V').($res+1)."','".$_POST['dan']."','".$_POST['vreme'].":00')");
 }
-else{
+else{//ucitavanje stranice
 ?>
 <head>
     <link rel="stylesheet" href="../style/bootstrap.min.css">
@@ -42,7 +42,7 @@ else{
 	include('menu_admin.html');
 	include('../include/login.php');
 
-	echo "<h4>Dodavanje grupe predmetu</h4>";
+	echo "<h4>Dodavanje grupe predmetu</h4>";//ovde pocinje doavanje grupe na predmet
 	$result = mysqli_query($conn,"select * from predmet");
 	echo "Izaberite predmet:<select id='predmet1'>";
 	echo "<option value=''></option>";
@@ -67,7 +67,7 @@ else{
 	<input type='submit' value='Dodaj' onclick='return dodaj_gr();'>
 	<div id='obv1'></div>
 	<?php
-	echo "<h4>Dodavanje grupe nastavniku</h4>";
+	echo "<h4>Dodavanje grupe nastavniku</h4>";//ovde pocinje dodavanje nastavnika na grupu
 	$result = mysqli_query($conn,"select * from zaposleni,korisnik where zaposleni.email=korisnik.email");
 	echo "Izaberite nastavnika:<select id='nastavnik1'>";
 	echo "<option value=''></option>";

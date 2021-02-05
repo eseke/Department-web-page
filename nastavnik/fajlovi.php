@@ -1,4 +1,5 @@
 <?php
+	//ispis fajlova i opcija sa fajlovima
 	include('../include/db_conn.php');
 	$result = mysqli_query($conn,"select * from materijali,korisnik where materijali.sifra_predmeta='".$_POST['odabir_pred']."' and materijali.tip_materijala='".$_POST['odabir_sekc']."' and materijali.id_nastavnika=korisnik.email order by materijali.redosled");
 	echo "<table>";

@@ -13,6 +13,9 @@
 <body>
     <div class='container'>
 <?php
+	/*
+	stranica za ismenu obavestenja
+	*/
 	session_start();
 	header('Content-type: text/html; charset=utf-8');
 	if(!isset($_SESSION['email'])|| !($_SESSION['type'] == 'z'))
@@ -24,13 +27,13 @@
 	include('../include/login.php');
 	if(!isset($_SESSION['email'])|| !($_SESSION['type'] == 'z'))
 		header('Location: ../');
-	if($_GET['id']!=0){
+	if($_GET['id']!=0){//provera da li zaposleni ima pravo pristupa
 		$result = mysqli_query($conn,"select * from obavestenje_predmet,grupa,drzi_predmet where obavestenje_predmet.id_obavestenja =".$_GET['id']." and obavestenje_predmet.id_predmeta=grupa.sifra_predmeta ".
 		"and grupa.id=drzi_predmet.id_grupe and drzi_predmet.id_nastavnika='".$_SESSION['email']."'");
 		if(!mysqli_num_rows($result))
 			header('Location: ../');
 	}
-	if(isset($_POST['obrisi'])){
+	if(isset($_POST['obrisi'])){//brisanje stranice posle klika na dugme
 		$result = mysqli_query($conn,"select * from fajl_uz_obavestenje where id_obavestenja=".$_GET['id']);
 		if(mysqli_num_rows($result)){
 			while($row=mysqli_fetch_assoc($result)){
@@ -41,23 +44,23 @@
 		mysqli_query($conn,"delete from obavestenje_predmet where id_obavestenja=".$_GET['id']);
 		header('Location:obav_pred');
 	}
-	if(isset($_POST['potvrda']) && isset($_POST['naslov']) && isset($_POST['datum']) && isset($_POST['sadrzaj'])){
+	if(isset($_POST['potvrda']) && isset($_POST['naslov']) && isset($_POST['datum']) && isset($_POST['sadrzaj'])){//izmena ili dodavanje obavestenja
 		$tmp = explode('.',$_POST['datum']);
-		if($_GET['id']==0){
+		if($_GET['id']==0){//dodavanje novog obavestenja
 			mysqli_query($conn,"insert into obavestenje_predmet (id_predmeta,naslov,sadrzaj,datum_objave,id_nastavnika) values ('".$_POST['odabir']."','".$_POST['naslov']."','".substr($_POST['sadrzaj'], 3, -4)."','".$tmp[2]."-".$tmp[1]."-".$tmp[0]."','".$_SESSION['email']."')");
 			$result = mysqli_query($conn,"select id_obavestenja from obavestenje_predmet where id_predmeta='".$_POST['odabir']."' and naslov='".$_POST['naslov']."' and sadrzaj='".substr($_POST['sadrzaj'], 3, -4)."' and datum_objave='".$tmp[2]."-".$tmp[1]."-".$tmp[0]."' and id_nastavnika='".$_SESSION['email']."'");
 			$row = mysqli_fetch_assoc($result);
 			$id_obav = $row['id_obavestenja'];
 			$total = count($_FILES['fajlovi']['name']);
-			if($_FILES['fajlovi']['tmp_name'][0]!=""){
+			if($_FILES['fajlovi']['tmp_name'][0]!=""){//dodavanje novih fajlova
 				for($i=0;$i<$total;$i++){
 					move_uploaded_file($_FILES['fajlovi']['tmp_name'][$i], "../predmeti/".$_POST['odabir']."/".$_FILES['fajlovi']['name'][$i]);
 					mysqli_query($conn,"insert into fajl_uz_obavestenje(id_obavestenja,putanja,ime_fajla) values(".$id_obav.",'../predmeti/".$_POST['odabir']."/".$_FILES['fajlovi']['name'][$i]."','".$_POST['fajl'.$i]."')");
 				}
 			}
-		}else{
+		}else{//azuriranje postojeceg obavestenja
 			mysqli_query($conn,"UPDATE obavestenje_predmet SET naslov='".$_POST['naslov']."', sadrzaj='".substr($_POST['sadrzaj'], 3, -4)."',datum_objave='".$tmp[2]."-".$tmp[1]."-".$tmp[0]."' where id_obavestenja=".$_GET['id']);
-			if(isset($_POST['st_fajl'])){
+			if(isset($_POST['st_fajl'])){//brisanje odabranih fajlova
 				for($i=0;$i<count($_POST['st_fajl']);$i++){
 					$result = mysqli_query($conn,"select * from fajl_uz_obavestenje where idfajla=".$_POST['st_fajl'][$i]);
 					$row = mysqli_fetch_assoc($result);
@@ -68,7 +71,7 @@
 			$result = mysqli_query($conn,"select * from obavestenje_predmet where id_obavestenja=".$_GET['id']);
 			$row = mysqli_fetch_assoc($result);
 			$total = count($_FILES['fajlovi']['name']);
-			if($_FILES['fajlovi']['tmp_name'][0]!=""){
+			if($_FILES['fajlovi']['tmp_name'][0]!=""){//dodavanje novih fajlova
 				for($i=0;$i<$total;$i++){
 					move_uploaded_file($_FILES['fajlovi']['tmp_name'][$i], "../predmeti/".$row['id_predmeta']."/".$_FILES['fajlovi']['name'][$i]);
 					mysqli_query($conn,"insert into fajl_uz_obavestenje(id_obavestenja,putanja,ime_fajla) values(".$_GET['id'].",'../predmeti/".$row['id_predmeta']."/".$_FILES['fajlovi']['name'][$i]."','".$_POST['fajl'.$i]."')");
@@ -78,7 +81,7 @@
 		header('Location:obav_pred');
 	}
 	echo "<form enctype='multipart/form-data' method='post' action=''>";
-	if($_GET['id']!=0){
+	if($_GET['id']!=0){//dohvatanje postojeceg obavestenja za izmenu
 		$result = mysqli_query($conn,"select * from obavestenje_predmet where id_obavestenja=".$_GET['id']);
 		$row = mysqli_fetch_assoc($result);
 	}else{
@@ -88,6 +91,7 @@
 		<select name='odabir' id='odabir'>
 			<option value=''></option>
 		<?php
+		//nastavnik bira predmet na koji dodaje obavestenje
 		$result = mysqli_query($conn,"select DISTINCT predmet.sifra_predmeta, predmet.naziv from predmet,drzi_predmet,grupa where drzi_predmet.id_nastavnika='".$_SESSION['email']."' and drzi_predmet.id_grupe=grupa.id and grupa.sifra_predmeta=predmet.sifra_predmeta");
 		while($res=mysqli_fetch_assoc($result))	
 			echo "<option value='".$res['sifra_predmeta']."'>".$res['naziv']."</option>";
@@ -98,7 +102,7 @@
 	echo "Naslov: <input type='text' id='naslov' name='naslov' value='".$row['naslov']."'><br/>";
 	echo "Datum: <input type='text' name='datum' id='datepicker' autocomplete='off'><br/>";
 	echo "<textarea name='sadrzaj' id='editor'>".$row['sadrzaj']."</textarea>";
-	if($_GET['id']!=0){
+	if($_GET['id']!=0){//ispis vec dodatih fajlova
 		$result1 = mysqli_query($conn,"select * from fajl_uz_obavestenje where id_obavestenja=".$_GET['id']." order by ime_fajla asc");
 		if(mysqli_num_rows($result1)){
 			echo "Odaberite fajlove koje hoćete da uklonite:<br/>";
@@ -107,6 +111,7 @@
 			}
 		}
 	}
+	//U nastavku se nalazi forma i skripta za dodati editor
 	?>
 	<script>
 	let MyEditor;

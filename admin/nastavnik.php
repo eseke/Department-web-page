@@ -1,25 +1,25 @@
 <?php
 #var_dump($_POST);
 include_once("../include/db_conn.php");
-if(isset($_POST['obrisi'])){
+if(isset($_POST['obrisi'])){//brisnje nastavnika i osvezavanje stranice
 	mysqli_query($conn,"delete from korisnik where email='".$_POST['id']."'");
 	mysqli_query($conn,"delete from zaposleni where email='".$_POST['id']."'");
 	header('Location:#');
 }
-else if(isset($_POST['id']) && isset($_POST['name'])){
+else if(isset($_POST['id']) && isset($_POST['name'])){//ajax azuriranje nastavnika
 	$email = $_POST['username']."@etf.bg.ac.rs";
 	$res1 = mysqli_query($conn,"update korisnik set email='".$email."',".($_POST['pass']!=''?"pass='".$_POST['pass']."',":"")."name='".$_POST['name']."',surname='".$_POST['surname']."',status='".(isset($_POST['status'])?"1":"0")."',type='z' where email='".$_POST['id']."'");
 	$res2 = mysqli_query($conn,"update zaposleni set email='".$email."',adresa = '".$_POST['adresa']."',mobilni = '".$_POST['mobilni']."',licni_sajt='".$_POST['sajt']."',biografija='".$_POST['biografija']."',zvanje='".$_POST['zvanje']."',broj_kabineta='".$_POST['kabinet']."',profilna_slika ='".$_POST['slika']."' where email='".$_POST['id']."'");
 	if($res1 && $res2)
 		echo "1";
 }
-else if(isset($_POST['name'])){
+else if(isset($_POST['name'])){//ajax dodavanje nastavnika
 	$res1 = mysqli_query($conn,"insert into korisnik (email,pass,name,surname,status,first_access,type) values ('".$_POST['username']."@etf.bg.ac.rs','".$_POST['pass']."','".$_POST['name']."','".$_POST['surname']."','".(isset($_POST['status'])?"1":"0")."',1,'z')");
 	$res2 = mysqli_query($conn,"insert into zaposleni(email,adresa,mobilni,licni_sajt,biografija,zvanje,broj_kabineta,profilna_slika) values('".$_POST['username']."@etf.bg.ac.rs','".$_POST['adresa']."','".$_POST['mobilni']."','".$_POST['sajt']."','".$_POST['biografija']."','".$_POST['zvanje']."','".$_POST['kabinet']."','".$_POST['slika']."')");
 	if($res1 && $res2)
 		echo "1";
 }
-else if(isset($_POST['id'])){
+else if(isset($_POST['id'])){//ajax ucitavanje nastavnika
 	$result = mysqli_query($conn,"select * from zaposleni, korisnik where zaposleni.email=korisnik.email and zaposleni.email='".$_POST['id']."'");
 	$row = mysqli_fetch_assoc($result);
 	echo "<table>";
@@ -52,7 +52,7 @@ else if(isset($_POST['id'])){
 	echo "<input type='submit' value='Ažuriraj' name='dodaj' onclick='return azur_nast();'>";
 	echo "<input type='submit' name='obrisi' value='Obriši nastavnika'><br/>";
 
-}else{
+}else{//ucitavanje osnovne stranice
 ?>
 	<head>
     <link rel="stylesheet" href="../style/bootstrap.min.css">
@@ -79,7 +79,7 @@ else if(isset($_POST['id'])){
 	<form id='forma' action='' method='post'>
 	
 	<?php 
-		if($_GET['tip']=='azuriraj'){
+		if($_GET['tip']=='azuriraj'){//ovo se ucita ako hocemo da azuriramo korisnika
 	?>
 	<h5>Ažuriranje zaposlenog</h5>
 	Odaberi zaposlenog: <select id='id' name='id' onchange="ispis_zap()">
@@ -91,7 +91,7 @@ else if(isset($_POST['id'])){
 		echo "<option id='".$row['email']."' value='".$row['email']."'>".$row['name']." ".$row['surname']."</option>";
 	echo "</select>";
 	echo "<div id='sadrzaj'></div>";
-	}else{		
+	}else{//ovo se ucita ako dodajemo korisnika
 	?>
 	
 	<h5>Dodavanje novog zaposlenog</h5>

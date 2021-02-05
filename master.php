@@ -14,13 +14,13 @@
     include('include/menu.html');
 
     include('include/db_conn.php');
-    if(isset($_SESSION['email'])&&isset($_GET['zaprati'])){
+    if(isset($_SESSION['email'])&&isset($_GET['zaprati'])){ //Dodavanje studenta na pedmet
 		mysqli_query($conn,"insert into prati_predmet(id_student, sifra_predmet) values('".$_SESSION['email']."','".$_GET['zaprati']."')");
-	}else if(isset($_SESSION['email'])&&isset($_GET['otprati'])){
+	}else if(isset($_SESSION['email'])&&isset($_GET['otprati'])){ //Uklanjanje studenta sa predmeta
 		mysqli_query($conn,"delete from prati_predmet where id_student='".$_SESSION['email']."' and sifra_predmet='".$_GET['otprati']."'");
 	}
-	$hash = [];
-	if(isset($_SESSION['role']) && $_SESSION['role']=='Student master studija'){
+	$hash = [];// Ova promenljiva pomaza da se moji predmeti neispisu kod ostalih
+	if(isset($_SESSION['role']) && $_SESSION['role']=='Student master studija'){// Ukoliko je ulogovan student master studija ispisuju se njegovi predmeti
 		echo "<h4>Moji predmeti</h4>";
 		$result = mysqli_query($conn, "select * from prati_predmet,predmet where prati_predmet.id_student ='".$_SESSION['email']."' and prati_predmet.sifra_predmet=predmet.sifra_predmeta");
 	if(mysqli_num_rows($result)){
@@ -33,7 +33,7 @@
 		echo "Niste odabrali ni jedan predmet!!<br/>";
     echo "<h4>Ostali predmeti</h4>";
 	}
-
+    //Ispisivanje svih predmeta ili samo predmeta koje student nije odabrao ukoliko je ulogovan master student
     $result = mysqli_query($conn,'SELECT * FROM `nastavni_plan`,`predmet` WHERE `nastavni_plan`.`sifra_predmeta`=`predmet`.`sifra_predmeta` order by `nastavni_plan`.`semestar` asc');
     if(mysqli_num_rows($result)){
         $godina = 0;

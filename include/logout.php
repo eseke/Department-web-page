@@ -1,4 +1,5 @@
 <?php
+	//brisanje podataka iz sesije
 	unset($_SESSION['name']);
 	unset($_SESSION['surname']);
 	unset($_SESSION['role']);

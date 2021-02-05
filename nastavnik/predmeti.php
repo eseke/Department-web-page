@@ -15,25 +15,25 @@
 	header('Content-type: text/html; charset=utf-8');
 	#var_dump($_POST);
 
-	if(isset($_POST['vidi']) && isset($_POST['val'])){
+	if(isset($_POST['vidi']) && isset($_POST['val'])){//ajax postavljanje materijala da bude vidljiv ili ne
 		include('../include/db_conn.php');
 		mysqli_query($conn,"update materijali set vidljiv=".$_POST['val']." where id_materijal=".$_POST['vidi']);
 		exit();
 	}
 
-	if(isset($_POST['gore'])){
+	if(isset($_POST['gore'])){//ajax premestanje predmeta gore u listi predmeta
 		include('../include/db_conn.php');
 		mysqli_query($conn,"update materijali set redosled=".($_POST['gore'])." where redosled=".($_POST['gore']-1)." and sifra_predmeta='".$_POST['odabir_pred']."' and tip_materijala='".$_POST['odabir_sekc']."'");
 		mysqli_query($conn,"update materijali set redosled=".($_POST['gore']-1)." where id_materijal=".$_POST['gore_id']);
 	}
 
-	if(isset($_POST['dole'])){
+	if(isset($_POST['dole'])){//ajax premestanje predmeta dole u listi predmeta
 		include('../include/db_conn.php');
 		mysqli_query($conn,"update materijali set redosled=".($_POST['dole'])." where redosled=".($_POST['dole']+1)." and sifra_predmeta='".$_POST['odabir_pred']."' and tip_materijala='".$_POST['odabir_sekc']."'");
 		mysqli_query($conn,"update materijali set redosled=".($_POST['dole']+1)." where id_materijal=".$_POST['dole_id']);
 	}
 
-	if(isset($_FILES['fajlovi']) && $_FILES['fajlovi']['tmp_name'][0]!=""){
+	if(isset($_FILES['fajlovi']) && $_FILES['fajlovi']['tmp_name'][0]!=""){//dodavanje novih materijala
 		include('../include/db_conn.php');
 		$total = count($_FILES['fajlovi']['name']);
 		$result = mysqli_query($conn,"select * from materijali where materijali.sifra_predmeta='".$_POST['odabir_pred']."' and materijali.tip_materijala='".$_POST['odabir_sekc']."'");
@@ -45,16 +45,17 @@
 		}
 	}
 
-	if(isset($_POST['obrisi'])&&$_POST['obrisi']!=''){
+	if(isset($_POST['obrisi'])&&$_POST['obrisi']!=''){//brisanje materijala
 		include('../include/db_conn.php');
 		$result = mysqli_query($conn,"select * from materijali where id_materijal=".$_POST['obrisi']);
 		$row = mysqli_fetch_assoc($result);
 		unlink($row['putanja']);
+		//azuriranje redosleda materijala posle njega
 		mysqli_query($conn,"update materijali set redosled=redosled-1 where sifra_predmeta='".$_POST['odabir_pred']."' and tip_materijala='".$_POST['odabir_sekc']."' and redosled>".$row['redosled']);
 		mysqli_query($conn,"delete from materijali where id_materijal=".$_POST['obrisi']);
 		include('../include/db_disconn.php');
 	}
-	if(isset($_POST['ESPB'])){
+	if(isset($_POST['ESPB'])){//azuriranje informacija o predmetu
 		include('../include/db_conn.php');
 		mysqli_query($conn,"update predmet set naziv='".$_POST['naziv']."', fond_casova='".$_POST['br_pred']."+".$_POST['br_vez']."+".$_POST['br_lab']."', broj_ESPB=".$_POST['ESPB'].",cilj_predmeta='".substr($_POST['sadrzaj1'], 3, -4)."',ishod_predmeta='".substr($_POST['ishod1'], 3, -4)."', komentar='".substr($_POST['kom1'], 3, -4)."' where sifra_predmeta='".$_POST['odabir_pred']."'");
 		for($i = 1;$i<10;$i++){
@@ -67,12 +68,12 @@
 	if(!isset($_SESSION['email'])|| !($_SESSION['type'] == 'z'))
 		header('Location: ../');
 	
-	if(isset($_POST['prom'])||isset($_POST['obrisi'])||isset($_FILES['fajlovi'])){
+	if(isset($_POST['prom'])||isset($_POST['obrisi'])||isset($_FILES['fajlovi'])){//posle ajax azuriranja vraca se samo azurirani deo stranice, ne i header i footer
 		if($_POST['odabir_sekc']=="info")
 			include('info.php');
 		else if($_POST['odabir_sekc']=="predavanja"||$_POST['odabir_sekc']=="predavanja"||$_POST['odabir_sekc']=="vezbe"||$_POST['odabir_sekc']=="rokovi")
 			include('fajlovi.php');
-	}else{
+	}else{//ispis stranice sa mogucnoscu izbora predmeta i stranice
 		include('../include/db_conn.php');
 		include('header_nast.php');
 		include('menu_nast.html');

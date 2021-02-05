@@ -2,7 +2,10 @@
     <div class='col-sm-12' id = 'menu'>
         <a href = 'obavestenja'>Sva</a>
         <?php
-            
+        /*
+        podmeni dela sajta za obaveštenja
+        kategorije obaveštenja se čitaju iz baze
+        */
         include('./include/db_conn.php');
         $result = mysqli_query($conn,'SELECT * from kategorija_obavestenja');
         while($row = mysqli_fetch_assoc($result)){

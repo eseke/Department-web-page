@@ -9,7 +9,8 @@
             </div>
             <div class='col-sm-3' id='login'>
                 <?php
-                    
+                    //Ovaj header se razlikuje po dostupnim linkovima
+                    //Na osnovni sajt se vraca preko z=nazia katedre
                     if(isset($_SESSION['name'])){
                         echo $_SESSION['name']." ".$_SESSION['surname']."<br/>";
                         echo $_SESSION['role'];

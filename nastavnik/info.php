@@ -1,5 +1,5 @@
 <?php
-
+	//informacije o predmetima i mogućnosti za njihovu izmenu
 	include('../include/db_conn.php');
 	$result = mysqli_query($conn,"select * from predmet where sifra_predmeta='".$_POST['odabir_pred']."'");
 	$row = mysqli_fetch_assoc($result);
@@ -18,7 +18,7 @@
 	echo "Komentar:<br/>";
 	echo "<textarea name='kom' id='editor3'>".$row['komentar']."</textarea>";
 	$result = mysqli_query($conn,"select * from nastavni_plan,odsek where nastavni_plan.sifra_predmeta='".$_POST['odabir_pred']."' and nastavni_plan.id_odseka=odsek.id");
-	if(mysqli_num_rows($result)){
+	if(mysqli_num_rows($result)){//izbor semestra i pita predmeta po odsecima
 		echo "Odaberite tip predmet i semestar za sledeće odseke:";
 		echo "<table>";
 		while($row=mysqli_fetch_assoc($result)){

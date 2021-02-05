@@ -23,6 +23,7 @@
 	<select id='odabir'onchange='loadNotifications()' >
 		<option value=''></option>
 	<?php
+	//odabir predmeta za koji se prikazuju obavestenja
 	$result = mysqli_query($conn,"select DISTINCT predmet.sifra_predmeta, predmet.naziv from predmet,drzi_predmet,grupa where drzi_predmet.id_nastavnika='".$_SESSION['email']."' and drzi_predmet.id_grupe=grupa.id and grupa.sifra_predmeta=predmet.sifra_predmeta");
 	while($res=mysqli_fetch_assoc($result))	
 		echo "<option value='".$res['sifra_predmeta']."'>".$res['naziv']."</option>";

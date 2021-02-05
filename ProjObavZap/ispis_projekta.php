@@ -1,4 +1,5 @@
 <?php
+//ispis projeta u različitim delovima sajta
 echo "<h3>".$row['naslov']."</h3>";
 if(!isset($_GET['tip']))
     echo $row['kategorija']."<br/>";

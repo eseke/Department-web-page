@@ -1,5 +1,5 @@
 <?php
-if(isset($_FILES['fajl'])){
+if(isset($_FILES['fajl'])){//ajax dodavanje studenata preko fajla
 	include_once('../include/db_conn.php');
 	$fajl = fopen($_FILES['fajl']['tmp_name'],'r');
 	$tmp = explode('.',$_FILES['fajl']['name']);
@@ -18,7 +18,7 @@ if(isset($_FILES['fajl'])){
 	}
 	fclose($fajl);
 	include_once('../include/db_disconn.php');
-}else{
+}else{//ucitavanje tranice
 ?>
 <head>
     <link rel="stylesheet" href="../style/bootstrap.min.css">

@@ -1,13 +1,13 @@
 <?php
 #var_dump($_POST);
 include_once("../include/db_conn.php");
-if(isset($_POST['obrisi'])){
+if(isset($_POST['obrisi'])){//brisanje student i osvezavanje stranice
 	mysqli_query($conn,"delete from korisnik where email='".$_POST['id']."'");
 	mysqli_query($conn,"delete from student where email='".$_POST['id']."'");
 	include_once('../include/db_disconn.php');
 	header('Location:#');
 }
-if(isset($_POST['id']) && isset($_POST['name'])){
+if(isset($_POST['id']) && isset($_POST['name'])){//ajax azuriranje studenta
 	$ind = explode('/',$_POST['indeks']);
 	$email = strtolower($_POST['surname'][0]).strtolower($_POST['name'][0]).$ind[0][2].$ind[0][3].$ind[1].$_POST['tip_studija']."@student.etf.rs";
 	$res1 = mysqli_query($conn,"update korisnik set email='".$email."',".($_POST['pass']!=''?"pass='".$_POST['pass']."',":"")."name='".$_POST['name']."',surname='".$_POST['surname']."',status='".(isset($_POST['status'])?"1":"0")."',type='s' where email='".$_POST['id']."'");
@@ -15,7 +15,7 @@ if(isset($_POST['id']) && isset($_POST['name'])){
 	if($res1 && $res2)
 		echo "1";
 }
-elseif(isset($_POST['name'])){
+elseif(isset($_POST['name'])){//ajax dodavanje studenta
 	$ind = explode('/',$_POST['indeks']);
 	$email = $_POST['surname'][0].$_POST['name'][0].$ind[0][2].$ind[0][3].$ind[1].$_POST['tip_studija']."@student.etf.rs";
 	$res1 = mysqli_query($conn,"insert into korisnik (email,pass,name,surname,status,first_access,type) values ('".$email."','".$_POST['pass']."','".$_POST['name']."','".$_POST['surname']."','".(isset($_POST['status'])?"1":"0")."',1,'s')");
@@ -24,7 +24,7 @@ elseif(isset($_POST['name'])){
 		echo "1";
 }
 
-else if(isset($_POST['id'])){
+else if(isset($_POST['id'])){//ajax ucitavanje studenta
 	$result = mysqli_query($conn,"select * from student, korisnik where student.email=korisnik.email and student.email='".$_POST['id']."'");
 	$row = mysqli_fetch_assoc($result);
 	echo "<table>";
@@ -73,7 +73,7 @@ else if(isset($_POST['id'])){
 	<form id='forma' action='' method='post'>
 	
 	<?php 
-		if($_GET['tip']=='azuriraj'){
+		if($_GET['tip']=='azuriraj'){//ucitavanje stranice za azuriranje studenta
 	?>
 	<h5>Ažuriranje studenta</h5>
 	Odaberi studenta: <select id='id' name='id' onchange="ispis_stud()">
@@ -85,7 +85,7 @@ else if(isset($_POST['id'])){
 		echo "<option id='".$row['email']."' value='".$row['email']."'>".$row['name']." ".$row['surname']."</option>";
 	echo "</select>";
 	echo "<div id='sadrzaj'></div>";
-	}else{		
+	}else{//ucitavanje stranice za ddavanje studenta
 	?>
 	
 	<h5>Dodavanje novog studenta</h5>

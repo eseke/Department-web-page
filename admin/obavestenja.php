@@ -3,14 +3,14 @@
 	header('Content-type: text/html; charset=utf-8');
 	if(!isset($_SESSION['email'])|| !($_SESSION['type'] == 'a'))
 		header('Location: ../');
-	if (isset($_POST['kat'])){
+	if (isset($_POST['kat'])){//ajax dodavanje novog obavestenja
 		include_once('../include/db_conn.php');
 		echo mysqli_query($conn,"insert into obavestenje_sajt (kategorija,naslov,sadrzaj,datum_objave,autor) value ('".$_POST['kat']."','".$_POST['naslov']."','".substr($_POST['sadrzaj'], 3, -4)."','".date("Y-m-d")."','".$_SESSION['email']."')");
-	}else if(isset($_POST['nova_kat'])){
+	}else if(isset($_POST['nova_kat'])){//ajax dodavanje nove kategorije obavestenja
 		include_once('../include/db_conn.php');
 		echo mysqli_query($conn,"insert into kategorija_obavestenja (naziv) value ('".$_POST['nova_kat']."')");
 
-	}else{
+	}else{//ucitavanje stranice
 		?>
 
 		<head>

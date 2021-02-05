@@ -1,4 +1,9 @@
 function loadNotifications() {
+	/*
+		Slanje ajax poziva
+		I ispisivanje vraćenog sadržaja ili poruke.
+		Sve funkcije u ovom fajlu koriste ajax pozive.
+	*/
 	str = document.getElementById('odabir').value;
 	if(str=="")
 		document.getElementById('obavestenja').innerHTML = "";

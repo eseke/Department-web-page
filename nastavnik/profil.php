@@ -7,6 +7,7 @@
 <body>
     <div class='container'>
 <?php
+	//azuriranje licnih informacija
     session_start();
 	header('Content-type: text/html; charset=utf-8');
 	if(!isset($_SESSION['email'])|| !($_SESSION['type'] == 'z'))
