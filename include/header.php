@@ -14,12 +14,13 @@
                 <?php
                     
                     if(isset($_SESSION['name'])){
-                        if(($_SESSION['type'] == 'z'))//Dodavaje putanje ka nastavnickom meniju
-                            echo "<a href='nastavnik/profil' id='nastavnik'>";
-                        else if($_SESSION['type']=='a')//Dodavanje putanje ka administratorskom meniju
-                            echo "<a href='admin/korisnici' id='nastavnik'>";
+                       
                         echo $_SESSION['name']." ".$_SESSION['surname']."<br/>";//Ispis osnovnih informacija o ulogovanom korisniku
                         echo $_SESSION['role']."</br>";//Ispis osnovnih informacija o ulogovanom korisniku
+                        if(($_SESSION['type'] == 'z'))//Dodavaje putanje ka nastavnickom meniju
+                        echo "<a href='nastavnik/profil' id='nastavnik'>Nastavnički meni";
+                    else if($_SESSION['type']=='a')//Dodavanje putanje ka administratorskom meniju
+                        echo "<a href='admin/korisnici' id='nastavnik'>Administratorski meni";
                         if(($_SESSION['type'] == 'z')||($_SESSION['type'] == 'a'))
                             echo "</a>";
                         include('logout.html');//logout dugme
