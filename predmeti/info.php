@@ -10,6 +10,8 @@
 	echo "Broj časova praktične nastave: ".$tmp[2]."</br>";
 	echo "Cilj predmeta: ".$row['cilj_predmeta']."</br>";
 	echo "Ishod predmeta: ".$row['ishod_predmeta']."</br>";
+	if(isset($row['komentar']))
+		echo "Dodatne informacije: ".$row['komentar']."</br>";
 	$res1 = mysqli_query($conn,"select * from nastavni_plan,odsek where sifra_predmeta='".$_GET['sifra']."' and nastavni_plan.id_odseka=odsek.id");
 	echo "Ovaj predmet se drži na sledećim odsecima:</br>";
 	while($row1 = mysqli_fetch_assoc($res1)){

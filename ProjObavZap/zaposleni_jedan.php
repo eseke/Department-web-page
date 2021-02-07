@@ -24,7 +24,7 @@ echo "Kabinet: ".$row['broj_kabineta']."<br/>";
 if($row['biografija']!="")
     echo "Biografija: ".$row['biografija']."<br/>";
 if($row['licni_sajt'])
-    echo "Lični sajt: <a href='".$row['licni_sajt']."'>".$row['licni_sajt']."</a>";
+    echo "Lični sajt: <a href='http://".$row['licni_sajt']."'>".$row['licni_sajt']."</a>";
 echo "</td></tr>";
 echo "</table>";
 include('./include/db_disconn.php');

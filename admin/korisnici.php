@@ -41,8 +41,8 @@ if(isset($_FILES['fajl'])){//ajax dodavanje studenata preko fajla
 	include('../include/login.php');
 
 	
-	echo "<a href='nastavnik?tip=nov'>Dodavanje nastavnika</a><br/>";
-	echo "<a href='nastavnik?tip=azuriraj'>Azuriranje nastavnika</a><br/>";
+	echo "<a href='nastavnik?tip=nov'>Dodavanje zaposlenog</a><br/>";
+	echo "<a href='nastavnik?tip=azuriraj'>Azuriranje zaposlenog</a><br/>";
 	echo "<a href='student?tip=nov'>Dodavanje studenta</a><br/>";
 	echo "<a href='student?tip=azuriraj'>Ažuriranje studenta</a>";
 	
